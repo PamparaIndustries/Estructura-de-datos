@@ -1,0 +1,14 @@
+Colas y Pilas en PHP
+Colas (FIFO) – Colas.php
+Se usa un array como cola, donde el primer elemento en entrar es el primero en salir.
+
+Se agregan elementos ("Orden 1" a "Orden 9") con array_push().
+
+Se elimina el primero con array_shift(), sacando "Orden 1".
+
+Pilas (LIFO) – Pilas.php
+Se usa un array como pila, donde el último elemento en entrar es el primero en salir.
+
+Se agregan números (1 a 7) con array_push().
+
+Se elimina el último con array_pop(), sacando 7.
