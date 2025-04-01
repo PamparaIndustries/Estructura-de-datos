@@ -1,0 +1,11 @@
+Principlamente se crea un array y en este se le hacen diferentes modificaciones como
+un nuevo elemento con $array[] = $mang por dar un ejemplo.
+tambien se usan funciones como:
+array_search()
+array_merge()
+array_slice()
+array_filter()
+
+y tambie algunas como: 
+unset()//Elimina la clave en el ejemplo
+asort()//organiza de mayor a menor en el ejemplo
