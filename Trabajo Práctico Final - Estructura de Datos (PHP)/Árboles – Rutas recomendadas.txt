@@ -1,0 +1,58 @@
+class NodoArbol {
+    public $valor;
+    public $izquierda;
+    public $derecha;
+
+    public function __construct($valor) {
+        $this->valor = $valor;
+        $this->izquierda = null;
+        $this->derecha = null;
+    }
+}
+
+class ArbolRutas {
+    public $raiz;
+
+    public function __construct() {
+        $this->raiz = null;
+    }
+
+    public function insertar($valor) {
+        $this->raiz = $this->insertarNodo($this->raiz, $valor);
+    }
+
+    private function insertarNodo($nodo, $valor) {
+        if ($nodo == null) {
+            return new NodoArbol($valor);
+        }
+        if ($valor < $nodo->valor) {
+            $nodo->izquierda = $this->insertarNodo($nodo->izquierda, $valor);
+        } else {
+            $nodo->derecha = $this->insertarNodo($nodo->derecha, $valor);
+        }
+        return $nodo;
+    }
+
+    public function mostrarInOrden($nodo) {
+        if ($nodo != null) {
+            $this->mostrarInOrden($nodo->izquierda);
+            echo $nodo->valor . "\n";
+            $this->mostrarInOrden($nodo->derecha);
+        }
+    }
+}
+
+$arbol = new ArbolRutas();
+$arbol->insertar("Ruta A - Directa");
+$arbol->insertar("Ruta B - Con transbordo");
+$arbol->insertar("Ruta C - Express");
+
+echo "Rutas recomendadas:\n";
+$arbol->mostrarInOrden($arbol->raiz);
+
+
+código del árbol representa rutas recomendadas mediante un árbol binario. 
+Las rutas se insertan con el método insertar, organizándolas en orden alfabético. 
+Luego se recorren en orden con mostrarInOrden, lo que permite mostrar las rutas de forma ordenada. 
+Cada ruta ocupa un nodo que puede tener una rama izquierda o derecha según su posición alfabética. 
+Este tipo de estructura es útil para organizar decisiones o sugerencias de manera jerárquica, como mostrar rutas más adecuadas según el caso.

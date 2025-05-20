@@ -1,0 +1,27 @@
+<?php
+
+class Pila {
+    private $elementos = [];
+
+    public function push($valor) { array_push($this->elementos, $valor); }
+    public function pop() { return array_pop($this->elementos); }
+    public function mostrar() { return array_reverse($this->elementos); }
+}
+
+$pila = new Pila();
+$pila->push("Estación A");
+$pila->push("Estación B");
+$pila->push("Estación C");
+
+print_r($pila->mostrar());
+
+$pila->pop();
+
+print_r($pila->mostrar());
+
+?>
+Este código implementa una estructura de pila en PHP para simular el recorrido de un pasajero en una línea de transporte.
+Cada estación visitada se almacena en la pila y el pasajero puede avanzar o retroceder en el recorrido.
+Estructura: Clase Pila → Gestiona la pila de estaciones. Propiedad $elementos → Almacena las estaciones en un arreglo privado.
+Método push($valor) → Agrega una estación a la pila. Método pop() → Simula que el pasajero baja en la última estación registrada. 
+Método mostrar() → Retorna la pila en orden inverso, desde la última estación hasta la primera.

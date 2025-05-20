@@ -1,0 +1,124 @@
+<?php
+
+class Nodo {
+    public $nombre;
+    public $siguiente;
+
+    public function __construct($nombre) {
+        $this->nombre = $nombre;
+        $this->siguiente = null;
+    }
+}
+
+class ListaEnlazada {
+    public $cabeza = null;
+
+    public function agregarEstacion($nombre) {
+        $nuevoNodo = new Nodo($nombre);
+        if ($this->cabeza == null) {
+            $this->cabeza = $nuevoNodo;
+        } else {
+            $actual = $this->cabeza;
+            while ($actual->siguiente !== null) {
+                $actual = $actual->siguiente;
+            }
+            $actual->siguiente = $nuevoNodo;
+        }
+    }
+
+    public function buscarEstacion($nombre) {
+        $actual = $this->cabeza;
+        while ($actual !== null) {
+            if ($actual->nombre === $nombre) {
+                return true;
+            }
+            $actual = $actual->siguiente;
+        }
+        return false;
+    }
+
+    public function eliminarEstacion($nombre) {
+        if ($this->cabeza == null) {
+            return;
+        }
+
+        if ($this->cabeza->nombre === $nombre) {
+            $this->cabeza = $this->cabeza->siguiente;
+            return;
+        }
+
+        $actual = $this->cabeza;
+        while ($actual->siguiente !== null) {
+            if ($actual->siguiente->nombre === $nombre) {
+                $actual->siguiente = $actual->siguiente->siguiente;
+                return;
+            }
+            $actual = $actual->siguiente;
+        }
+    }
+
+    public function mostrarEstaciones() {
+        $actual = $this->cabeza;
+        while ($actual !== null) {
+            echo $actual->nombre . "\n";
+            $actual = $actual->siguiente;
+        }
+    }
+}
+
+$lista = new ListaEnlazada();
+
+while (true) {
+    echo "\nOpciones:\n";
+    echo "1. Agregar estación\n";
+    echo "2. Buscar estación\n";
+    echo "3. Eliminar estación\n";
+    echo "4. Mostrar estaciones\n";
+    echo "5. Salir\n";
+    echo "Elige una opción: ";
+    
+    $opcion = trim(fgets(STDIN));
+
+    switch ($opcion) {
+        case "1":
+            echo "Ingresa el nombre de la estación: ";
+            $nombre = trim(fgets(STDIN));
+            $lista->agregarEstacion($nombre);
+            echo "Estación '$nombre' agregada.\n";
+            break;
+        case "2":
+            echo "Ingresa el nombre de la estación a buscar: ";
+            $nombre = trim(fgets(STDIN));
+            if ($lista->buscarEstacion($nombre)) {
+                echo "Estación '$nombre' encontrada.\n";
+            } else {
+                echo "Estación '$nombre' no encontrada.\n";
+            }
+            break;
+        case "3":
+            echo "Ingresa el nombre de la estación a eliminar: ";
+            $nombre = trim(fgets(STDIN));
+            $lista->eliminarEstacion($nombre);
+            echo "Estación '$nombre' eliminada.\n";
+            break;
+        case "4":
+            echo "Lista de estaciones:\n";
+            $lista->mostrarEstaciones();
+            break;
+        case "5":
+            echo "Saliendo...\n";
+            exit;
+        default:
+            echo "Opción no válida.\n";
+    }
+}
+
+
+?>
+Este código implementa una lista enlazada interactiva donde el usuario puede agregar, eliminar, buscar y mostrar estaciones 
+mediante un menú en consola.
+
+Descripción: Este código implementa una lista enlazada en PHP para gestionar estaciones de transporte.
+Operaciones disponibles:  Agregar estación → Añade un nuevo nodo.  Buscar estación → Verifica si una estación está en la lista.
+  Eliminar estación → Elimina una estación específica.  Mostrar estaciones → Muestra todas las estaciones registradas. 
+  Salir → Cierra el programa.

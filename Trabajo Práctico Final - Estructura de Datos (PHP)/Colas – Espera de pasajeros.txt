@@ -1,0 +1,33 @@
+class Cola {
+    private $elementos = [];
+
+    public function enqueue($valor) {
+        array_push($this->elementos, $valor);
+    }
+
+    public function dequeue() {
+        return array_shift($this->elementos);
+    }
+
+    public function mostrar() {
+        return $this->elementos;
+    }
+}
+
+$cola = new Cola();
+$cola->enqueue("Pasajero 1");
+$cola->enqueue("Pasajero 2");
+$cola->enqueue("Pasajero 3");
+
+echo "Cola actual:\n";
+print_r($cola->mostrar());
+
+echo "Atendiendo a: " . $cola->dequeue() . "\n";
+
+echo "Cola después de atender:\n";
+print_r($cola->mostrar());
+
+
+El código de la cola simula la fila de espera de pasajeros en una estación utilizando una estructura de tipo FIFO (First In, First Out).
+Se agregan pasajeros al final de la cola con el método enqueue, se atienden en orden de llegada con dequeue, y se puede ver el estado actual de la fila con mostrar. 
+Esta estructura refleja el comportamiento de una fila real donde el primero en llegar es el primero en salir.
