@@ -1,0 +1,265 @@
+<?php
+// ---------------- PUNTO 1: Arreglos ----------------
+$lineas = array(
+    array("codigo" => "A", "nombre" => "Línea Roja", "capacidad" => 50),
+    array("codigo" => "B", "nombre" => "Línea Azul", "capacidad" => 40),
+    array("codigo" => "C", "nombre" => "Línea Verde", "capacidad" => 60),
+    array("codigo" => "D", "nombre" => "Línea Amarilla", "capacidad" => 45),
+    array("codigo" => "E", "nombre" => "Línea Naranja", "capacidad" => 55),
+    array("codigo" => "F", "nombre" => "Línea Morada", "capacidad" => 30),
+    array("codigo" => "G", "nombre" => "Línea Marrón", "capacidad" => 70)
+);
+
+// ---------------- PUNTO 2: Lista Enlazada ----------------
+class Nodo {
+    public $nombre;
+    public $siguiente;
+
+    public function __construct($nombre) {
+        $this->nombre = $nombre;
+        $this->siguiente = null;
+    }
+}
+
+class ListaEnlazada {
+    public $cabeza = null;
+
+    public function agregarEstacion($nombre) {
+        $nuevoNodo = new Nodo($nombre);
+        if ($this->cabeza == null) {
+            $this->cabeza = $nuevoNodo;
+        } else {
+            $actual = $this->cabeza;
+            while ($actual->siguiente !== null) {
+                $actual = $actual->siguiente;
+            }
+            $actual->siguiente = $nuevoNodo;
+        }
+    }
+
+    public function buscarEstacion($nombre) {
+        $actual = $this->cabeza;
+        while ($actual !== null) {
+            if ($actual->nombre === $nombre) {
+                return true;
+            }
+            $actual = $actual->siguiente;
+        }
+        return false;
+    }
+
+    public function eliminarEstacion($nombre) {
+        if ($this->cabeza == null) return;
+
+        if ($this->cabeza->nombre === $nombre) {
+            $this->cabeza = $this->cabeza->siguiente;
+            return;
+        }
+
+        $actual = $this->cabeza;
+        while ($actual->siguiente !== null) {
+            if ($actual->siguiente->nombre === $nombre) {
+                $actual->siguiente = $actual->siguiente->siguiente;
+                return;
+            }
+            $actual = $actual->siguiente;
+        }
+    }
+
+    public function mostrarEstaciones() {
+        $actual = $this->cabeza;
+        while ($actual !== null) {
+            echo $actual->nombre . "\n";
+            $actual = $actual->siguiente;
+        }
+    }
+}
+
+// ---------------- PUNTO 3: Pila ----------------
+class Pila {
+    private $elementos = [];
+
+    public function push($valor) { array_push($this->elementos, $valor); }
+    public function pop() { return array_pop($this->elementos); }
+    public function mostrar() { return array_reverse($this->elementos); }
+}
+
+// ---------------- PUNTO 4: Cola ----------------
+class Cola {
+    private $elementos = [];
+
+    public function enqueue($valor) { array_push($this->elementos, $valor); }
+    public function dequeue() { return array_shift($this->elementos); }
+    public function mostrar() { return $this->elementos; }
+}
+
+// ---------------- PUNTO 5: Árbol ----------------
+class NodoArbol {
+    public $valor;
+    public $izquierda;
+    public $derecha;
+
+    public function __construct($valor) {
+        $this->valor = $valor;
+        $this->izquierda = null;
+        $this->derecha = null;
+    }
+}
+
+class ArbolRutas {
+    public $raiz;
+
+    public function __construct() {
+        $this->raiz = null;
+    }
+
+    public function insertar($valor) {
+        $this->raiz = $this->insertarNodo($this->raiz, $valor);
+    }
+
+    private function insertarNodo($nodo, $valor) {
+        if ($nodo == null) return new NodoArbol($valor);
+
+        if ($valor < $nodo->valor) {
+            $nodo->izquierda = $this->insertarNodo($nodo->izquierda, $valor);
+        } else {
+            $nodo->derecha = $this->insertarNodo($nodo->derecha, $valor);
+        }
+        return $nodo;
+    }
+
+    public function mostrarInOrden($nodo) {
+        if ($nodo != null) {
+            $this->mostrarInOrden($nodo->izquierda);
+            echo $nodo->valor . "\n";
+            $this->mostrarInOrden($nodo->derecha);
+        }
+    }
+}
+
+// ---------------- PUNTO 6: Grafo ----------------
+class Grafo {
+    private $adyacencia = [];
+
+    public function agregarVertice($nombre) {
+        if (!isset($this->adyacencia[$nombre])) {
+            $this->adyacencia[$nombre] = [];
+        }
+    }
+
+    public function agregarArista($origen, $destino) {
+        if (isset($this->adyacencia[$origen]) && isset($this->adyacencia[$destino])) {
+            $this->adyacencia[$origen][] = $destino;
+            $this->adyacencia[$destino][] = $origen; // si es bidireccional
+        }
+    }
+
+    public function mostrarGrafo() {
+        foreach ($this->adyacencia as $estacion => $conexiones) {
+            echo "Estación $estacion conectada con: " . implode(", ", $conexiones) . "\n";
+        }
+    }
+}
+
+// ---------------- Menú Principal ----------------
+function mostrarMenu() {
+    echo "\n===== SISTEMA METRO SIMULADOR =====\n";
+    echo "1. Ver líneas registradas (Arreglo)\n";
+    echo "2. Gestionar estaciones (Lista enlazada)\n";
+    echo "3. Simular recorrido pasajero (Pila)\n";
+    echo "4. Fila de espera (Cola)\n";
+    echo "5. Ver rutas recomendadas (Árbol)\n";
+    echo "6. Red de estaciones (Grafo)\n";
+    echo "7. Salir\n";
+    echo "Elige una opción: ";
+}
+
+// Variables globales para estructuras
+$lista = new ListaEnlazada();
+$pila = new Pila();
+$cola = new Cola();
+$arbol = new ArbolRutas();
+$grafo = new Grafo();
+
+// Insertar rutas en el árbol
+$arbol->insertar("Ruta 1 - Express");
+$arbol->insertar("Ruta 2 - Local");
+$arbol->insertar("Ruta 3 - Nocturna");
+
+// Crear red de estaciones (grafo)
+$grafo->agregarVertice("Central");
+$grafo->agregarVertice("Museo");
+$grafo->agregarVertice("Parque");
+$grafo->agregarVertice("Universidad");
+$grafo->agregarArista("Central", "Museo");
+$grafo->agregarArista("Museo", "Parque");
+$grafo->agregarArista("Parque", "Universidad");
+
+// Bucle principal
+while (true) {
+    mostrarMenu();
+    $opcion = trim(fgets(STDIN));
+
+    switch ($opcion) {
+        case "1":
+            print_r($lineas);
+            break;
+        case "2":
+            echo "1. Agregar estación\n2. Buscar\n3. Eliminar\n4. Mostrar\nElige: ";
+            $op = trim(fgets(STDIN));
+            switch ($op) {
+                case "1":
+                    echo "Nombre estación: ";
+                    $nombre = trim(fgets(STDIN));
+                    $lista->agregarEstacion($nombre);
+                    break;
+                case "2":
+                    echo "Buscar estación: ";
+                    $nombre = trim(fgets(STDIN));
+                    echo $lista->buscarEstacion($nombre) ? "Encontrada\n" : "No encontrada\n";
+                    break;
+                case "3":
+                    echo "Eliminar estación: ";
+                    $nombre = trim(fgets(STDIN));
+                    $lista->eliminarEstacion($nombre);
+                    break;
+                case "4":
+                    $lista->mostrarEstaciones();
+                    break;
+            }
+            break;
+        case "3":
+            $pila->push("Estación Central");
+            $pila->push("Estación Museo");
+            $pila->push("Estación Universidad");
+            echo "Recorrido actual:\n";
+            print_r($pila->mostrar());
+            $pila->pop();
+            echo "Después de retroceder:\n";
+            print_r($pila->mostrar());
+            break;
+        case "4":
+            $cola->enqueue("Pasajero 1");
+            $cola->enqueue("Pasajero 2");
+            $cola->enqueue("Pasajero 3");
+            echo "Cola actual:\n";
+            print_r($cola->mostrar());
+            echo "Atendiendo a: " . $cola->dequeue() . "\n";
+            echo "Cola después:\n";
+            print_r($cola->mostrar());
+            break;
+        case "5":
+            echo "Rutas recomendadas:\n";
+            $arbol->mostrarInOrden($arbol->raiz);
+            break;
+        case "6":
+            $grafo->mostrarGrafo();
+            break;
+        case "7":
+            echo "Saliendo del sistema Metro...\n";
+            exit;
+        default:
+            echo "Opción inválida.\n";
+    }
+}
+?>

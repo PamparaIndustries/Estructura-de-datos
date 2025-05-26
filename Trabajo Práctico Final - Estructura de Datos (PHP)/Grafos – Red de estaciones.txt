@@ -1,0 +1,43 @@
+<?php
+// Este código representa estaciones del metro y sus conexiones como un grafo.
+// Documentación Técnica – Red de estaciones (Grafo):
+// agregarVertice() añade estaciones, agregarArista() conecta dos, mostrarGrafo() muestra las conexiones.
+
+class Grafo {
+    private $adyacencia = [];
+
+    public function agregarVertice($nombre) {
+        if (!isset($this->adyacencia[$nombre])) {
+            $this->adyacencia[$nombre] = [];
+        }
+    }
+
+    public function agregarArista($origen, $destino) {
+        if (isset($this->adyacencia[$origen]) && isset($this->adyacencia[$destino])) {
+            $this->adyacencia[$origen][] = $destino;
+            $this->adyacencia[$destino][] = $origen; // si es bidireccional
+        }
+    }
+
+    public function mostrarGrafo() {
+        foreach ($this->adyacencia as $estacion => $conexiones) {
+            echo "Estación $estacion conectada con: " . implode(", ", $conexiones) . "\n";
+        }
+    }
+}
+
+$grafo = new Grafo();
+
+// Agregamos estaciones del metro
+$grafo->agregarVertice("Central");
+$grafo->agregarVertice("Museo");
+$grafo->agregarVertice("Parque");
+$grafo->agregarVertice("Universidad");
+
+// Conectamos estaciones
+$grafo->agregarArista("Central", "Museo");
+$grafo->agregarArista("Museo", "Parque");
+$grafo->agregarArista("Parque", "Universidad");
+
+$grafo->mostrarGrafo();
+?>
