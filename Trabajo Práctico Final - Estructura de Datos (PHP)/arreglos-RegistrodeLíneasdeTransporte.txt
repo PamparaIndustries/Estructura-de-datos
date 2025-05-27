@@ -1,0 +1,18 @@
+<?php
+Este código define un arreglo con más líneas de metro y usa 'print_r()' para mostrar los datos de forma estructurada.
+Documentación Técnica – Registro de Líneas de Metro:
+Se implementa un arreglo de arreglos en PHP, añadiendo varias líneas del metro con sus respectivos códigos y capacidades.
+Luego se usa print_r() para visualizar la información almacenada.
+
+$lineas = array(
+    array("codigo" => "A", "nombre" => "Línea Roja", "capacidad" => 50),
+    array("codigo" => "B", "nombre" => "Línea Azul", "capacidad" => 40),
+    array("codigo" => "C", "nombre" => "Línea Verde", "capacidad" => 60),
+    array("codigo" => "D", "nombre" => "Línea Amarilla", "capacidad" => 45),
+    array("codigo" => "E", "nombre" => "Línea Naranja", "capacidad" => 55),
+    array("codigo" => "F", "nombre" => "Línea Morada", "capacidad" => 30),
+    array("codigo" => "G", "nombre" => "Línea Marrón", "capacidad" => 70)
+);
+
+print_r($lineas);
+?>

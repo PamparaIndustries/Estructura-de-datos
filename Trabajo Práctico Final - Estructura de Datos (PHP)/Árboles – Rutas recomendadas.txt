@@ -1,3 +1,8 @@
+<?php
+// Este código del árbol representa rutas recomendadas del metro mediante un árbol binario.
+// Documentación Técnica – Árbol de rutas:
+// insertar() agrega rutas ordenadas alfabéticamente, mostrarInOrden() las lista ordenadas.
+
 class NodoArbol {
     public $valor;
     public $izquierda;
@@ -43,16 +48,10 @@ class ArbolRutas {
 }
 
 $arbol = new ArbolRutas();
-$arbol->insertar("Ruta A - Directa");
-$arbol->insertar("Ruta B - Con transbordo");
-$arbol->insertar("Ruta C - Express");
+$arbol->insertar("Ruta 1 - Express");
+$arbol->insertar("Ruta 2 - Local");
+$arbol->insertar("Ruta 3 - Nocturna");
 
 echo "Rutas recomendadas:\n";
 $arbol->mostrarInOrden($arbol->raiz);
-
-
-código del árbol representa rutas recomendadas mediante un árbol binario. 
-Las rutas se insertan con el método insertar, organizándolas en orden alfabético. 
-Luego se recorren en orden con mostrarInOrden, lo que permite mostrar las rutas de forma ordenada. 
-Cada ruta ocupa un nodo que puede tener una rama izquierda o derecha según su posición alfabética. 
-Este tipo de estructura es útil para organizar decisiones o sugerencias de manera jerárquica, como mostrar rutas más adecuadas según el caso.
+?>

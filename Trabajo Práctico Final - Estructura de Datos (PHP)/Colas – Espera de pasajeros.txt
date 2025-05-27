@@ -1,3 +1,8 @@
+<?php
+// Este código simula la fila de espera de pasajeros en una estación de metro utilizando una estructura FIFO (Cola).
+// Documentación Técnica – Cola de espera:
+// enqueue() agrega pasajeros, dequeue() los atiende, mostrar() enseña la fila actual.
+
 class Cola {
     private $elementos = [];
 
@@ -26,8 +31,4 @@ echo "Atendiendo a: " . $cola->dequeue() . "\n";
 
 echo "Cola después de atender:\n";
 print_r($cola->mostrar());
-
-
-El código de la cola simula la fila de espera de pasajeros en una estación utilizando una estructura de tipo FIFO (First In, First Out).
-Se agregan pasajeros al final de la cola con el método enqueue, se atienden en orden de llegada con dequeue, y se puede ver el estado actual de la fila con mostrar. 
-Esta estructura refleja el comportamiento de una fila real donde el primero en llegar es el primero en salir.
+?>

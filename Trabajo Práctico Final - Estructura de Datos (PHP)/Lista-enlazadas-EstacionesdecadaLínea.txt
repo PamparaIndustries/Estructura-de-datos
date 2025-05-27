@@ -1,4 +1,7 @@
 <?php
+//Este código implementa una lista enlazada interactiva donde el usuario puede agregar, eliminar, buscar y mostrar estaciones mediante un menú en consola.
+//Documentación Técnica – Estaciones de una Línea (Lista Enlazada):
+//Clase Nodo y ListaEnlazada. Permite agregar, buscar, eliminar y mostrar estaciones en una línea de metro.
 
 class Nodo {
     public $nombre;
@@ -38,9 +41,7 @@ class ListaEnlazada {
     }
 
     public function eliminarEstacion($nombre) {
-        if ($this->cabeza == null) {
-            return;
-        }
+        if ($this->cabeza == null) return;
 
         if ($this->cabeza->nombre === $nombre) {
             $this->cabeza = $this->cabeza->siguiente;
@@ -110,15 +111,6 @@ while (true) {
             exit;
         default:
             echo "Opción no válida.\n";
-    }
+    }
 }
-
-
 ?>
-Este código implementa una lista enlazada interactiva donde el usuario puede agregar, eliminar, buscar y mostrar estaciones 
-mediante un menú en consola.
-
-Descripción: Este código implementa una lista enlazada en PHP para gestionar estaciones de transporte.
-Operaciones disponibles:  Agregar estación → Añade un nuevo nodo.  Buscar estación → Verifica si una estación está en la lista.
-  Eliminar estación → Elimina una estación específica.  Mostrar estaciones → Muestra todas las estaciones registradas. 
-  Salir → Cierra el programa.
