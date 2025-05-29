@@ -1,0 +1,9 @@
+Este código implementa un grafo no dirigido en PHP. La clase Grafo permite almacenar vértices y aristas en estructuras de datos (array).
+
+agregarVertice($vertice): Añade un nuevo vértice al grafo.
+
+agregarArista($vertice1, $vertice2): Crea una conexión bidireccional entre dos vértices.
+
+imprimirGrafo(): Muestra los vértices y sus conexiones.
+
+Al final, se crea un grafo con los vértices "A", "B", "C", "D" y algunas aristas que conectan estos nodos.
