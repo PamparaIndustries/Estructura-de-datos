@@ -1,0 +1,9 @@
+Este código implementa un árbol binario de búsqueda en PHP. La clase Nodo representa cada elemento del árbol, con referencias a sus nodos izquierdo y derecho. La clase ArbolBinario gestiona la inserción de valores y los recorridos clásicos:
+
+InOrden: Recorrido en el orden izquierdo-raíz-derecho.
+
+PreOrden: Raíz-izquierdo-derecho.
+
+PostOrden: Izquierdo-derecho-raíz.
+
+Cada método recorre el árbol y muestra los valores almacenados en orden según el tipo de recorrido.
